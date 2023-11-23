@@ -1,0 +1,8 @@
+body {
+    font-style: italic;
+    font-family: "Engravers MT", Times, serif;
+    color : rgb(34, 105, 2);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
