@@ -3,6 +3,7 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.automap import automap_base
 import matplotlib.pyplot as plt
+import sqlite3
 import base64
 from io import BytesIO
 
@@ -37,9 +38,11 @@ def cars():
         "table": results
     }
 
+    unique_makes = [results[0] for results in top_makes_and_models]
+    unique_models = [results[1] for results in top_makes_and_models]
+
     session.close()
     return jsonify(table_results)
-
 
 
 

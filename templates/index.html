@@ -35,7 +35,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: arial}
     <hr>
     <form action="/action_page.php" target="_blank">
       <p><label>Make</label></p>
-  <select name="cars" id="makes" required>
+      <label for="makes">Select a car make:</label>
+      <select name="cars" id="makes" onchange="captureSelectedMake()" required>
 
   </select>
   <br><br>
