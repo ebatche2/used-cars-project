@@ -23,9 +23,50 @@ function compileSecondValues(selectedMake) {
 
     // Log the compiled second values
     console.log(secondValues);
-  });
-}
 
+  let samples = data.table;
+    // Fill the dropdown menu with all the models:
+    let dropdownMenu = d3.select("#modelsDropdown");
+    for (let i = 0; i < samples.length; i++) {
+      dropdownMenu.append("option").text(secondValues[i]).property("value", secondValues[i]);
+    }
+    // Add an event listener to capture the user selection
+  dropdownMenu.on("change", function () {
+  // Get the selected model from the dropdown
+  var selectedModel = d3.select(this).property("value");
+
+  //Log or do something with the selected model
+  console.log("Selected model:", selectedModel);
+   // first = uniqueMakesArray[0];
+    //Capture selected model
+    //function captureSelectedModel() {
+      // Get the selected make from the dropdown
+      //var dropdown = document.getElementById("#modelsDropdown");
+      //var selectedModel = dropdown.options[dropdown.selectedIndex].value;
+      //console.log("Selected model:", selectedModel);
+    
+      // Call the function to compile second values using the selected make
+      //compileSecondValues(selectedModel);
+    })
+    // Capture user input
+    var yearInput = document.getElementById("year");
+    var mileageInput = document.getElementById("mileage");
+
+    // Event listener for user input changes
+    yearInput.addEventListener("input", function () {
+        var yearValue = this.value;
+        console.log("Year: " + yearValue);
+        // You can perform further actions with the year value here
+    });
+
+    mileageInput.addEventListener("input", function () {
+        var mileageValue = this.value;
+        console.log("Mileage: " + mileageValue);
+        // You can perform further actions with the mileage value here
+    });
+
+  });
+  }
 // Rest of your code
 d3.json("api/cars").then((data) => {
   console.log(data);
