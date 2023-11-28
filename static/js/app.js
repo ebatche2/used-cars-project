@@ -1,30 +1,28 @@
-
 function captureSelectedMake() {
+  // Get the selected make from the dropdown
   var dropdown = document.getElementById("makes");
   var selectedMake = dropdown.options[dropdown.selectedIndex].value;
   console.log("Selected make:", selectedMake);
 
-  // Make API call to get unique models for the selected make
-  getUniqueModels(selectedMake);
+  // Call the function to compile second values using the selected make
+  compileSecondValues(selectedMake);
 }
 
-function getUniqueModels(selectedMake) {
-  // Make an API call to get models for the selected make
-  // Replace 'YOUR_MODEL_API_ENDPOINT' with the actual API endpoint for models
-  let modelsApiEndpoint = `YOUR_MODEL_API_ENDPOINT?make=${selectedMake}`;
+function compileSecondValues(selectedMake) {
+  // Replace "api/cars" with the actual API endpoint
+  d3.json("api/cars").then((data) => {
+    console.log(data);
 
-  // Assuming you are using D3.js for API calls
-  d3.json(modelsApiEndpoint).then((modelData) => {
-    console.log("Unique Models for the Selected Make:", modelData);
+    // Access the array using the 'table' property
+    const dataArray = data.table;
 
-    // Assuming 'modelsDropdown' is the ID of your models dropdown
-    let modelDropdown = d3.select("#modelsDropdown");
-    modelDropdown.selectAll("option").remove(); // Clear existing options
+    // Use filter to get arrays with a matching first value, then use map to extract the second values
+    const secondValues = dataArray
+      .filter((array) => array[0] === selectedMake)
+      .map((array) => array[1]);
 
-    // Fill the models dropdown with unique models
-    for (let model of modelData) {
-      modelDropdown.append("option").text(model).property("value", model);
-    }
+    // Log the compiled second values
+    console.log(secondValues);
   });
 }
 
@@ -92,8 +90,8 @@ function init() {
 }
 
 // Initialize DataTable and dropdown on document ready
-$(document).ready(function () {
-  initializeDataTable();
-});
+//$(document).ready(function () {
+//  initializeDataTable();
+//});
 
 init();
