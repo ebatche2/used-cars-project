@@ -6,3 +6,12 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+nav{
+    font-style: italic;
+    font-size:large;
+    color: blue;
+    float: right;
+
+
+}

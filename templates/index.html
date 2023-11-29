@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>W3.CSS Template</title>
+<title>Used Cars Project</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Link your CSS file here -->
 <link href="../static/css/style.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
@@ -27,39 +30,77 @@ body,h1,h2,h3,h4,h5,h6 {font-family: arial}
 </head>
 <body class="w3-content w3-border-left w3-border-right">
 
+
+
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-grey w3-collapse w3-top" style="z-index:3;width:260px" id="mySidebar">
   <div class="w3-container w3-display-container w3-padding-16">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
     <h3>Car Features</h3>
     <hr>
-    <form action="/action_page.php" target="_blank">
-      <p><label>Make</label></p>
-      <label for="makes">Select a car make:</label>
-      <select name="cars" id="makes" onchange="captureSelectedMake()" required>
-
+    
+    <form method="POST" action="/model" role="form", name="petform"></form>
+      <p><label for="makes">Make</label></p>
+      <select name="cars" id="makes" onchange="captureSelectedMake()" required></select>
+      <br><br>
   </select>
-        <br><br>
-        <p><label>Model</label></p>
-        <select name="models" id="modelsDropdown" required></select>
-        <br><br>     
-        <p><label>Year</label></p>
-        <input class="w3-input w3-border" type="number" value="1" name="year" min="1950" max="2024">              
-        <p><label>Mileage</label></p>
-        <input class="w3-input w3-border" type="number" value="0" name="mileage" min="0" max="10000000">
-        <p><button class="w3-button w3-block w3-green w3-left-align" type="submit"><i class="fa fa-search w3-margin-right"></i>Find Market Value</button></p>
+  <p><label for="modelsDropdown">Model</label></p>
+  <select name="models" id="modelsDropdown" required></select>
+  <br><br>  
+
+      <p>
+  
+</p>
+<p>
+  <p><label for="year">Year</label></p>
+  <select class="w3-select w3-border" name="year" id="year"></select>
+
+  </p>
+  
+    <script>
+      var yearDropdown = document.getElementById("year");
+      for (var year = 1950; year <= 2024; year++) {
+        var option = document.createElement("option");
+        option.value = year;
+        option.text = year;
+        yearDropdown.add(option);
+      }
+    </script>
+  </select>
+  
+  <p>
+    <p><label for="mileage">Mileage</label></p>
+  <select class="w3-select w3-border" name="mileage" id="mileage"></select>
+  </p>
+  
+    <script>
+      var mileageDropdown = document.getElementById("mileage");
+      for (var mileage = 0; mileage <= 350000; mileage += 10000) {
+        var option = document.createElement("option");
+        option.value = mileage;
+        option.text = mileage;
+        mileageDropdown.add(option);
+      }
+    </script>
+  </select>
+  
+
+  <p><button class="w3-button w3-block w3-green w3-left-align" type="button" onclick="saveFormData()"><i class="fa fa-search w3-margin-right"></i>Find Market Value</button></p>
       </form>
+
+      <button class="w3-button w3-block w3-green w3-left-align" type="button" onclick="saveFormData()">
+        <a class="nav-link active" aria-current="page" href="{{ url_for('data') }}">Data</a></a>
+      </button>
+      
+            
+        
+
+      </button>
     </div>
   </nav>
   </select>
-  <br><br>     
-      <p><label></i>Year</label></p>
-      <input class="w3-input w3-border" type="number" value="1" name="Adults" min="1950" max="2024">              
-      <p><label></i> Mileage</label></p>
-      <input class="w3-input w3-border" type="number" value="0" name="Mileage" min="0" max="10000000">
-      <p><button class="w3-button w3-block w3-green w3-left-align" type="submit"><i class="<span></span> w3-margin-right"></i> &#36; Find Market Value<span>   </span></button></p>
-    </form>
- 
+     
+
 </nav>
 
 <!-- Top menu on small screens -->
@@ -74,8 +115,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: arial}
 <!-- !PAGE CONTENT! -->
 <div class="w3-main w3-white" style="margin-left:260px">
 
-  <!-- Push down content on small screens -->
-  <div class="w3-hide-large" style="margin-top:80px"></div>
+ 
 
   <!-- Slideshow Header -->
   <div class="w3-container" id="apartment">
@@ -120,25 +160,27 @@ body,h1,h2,h3,h4,h5,h6 {font-family: arial}
     </div>
   </div>
 
-  <div class="w3-container">
-    <h4><strong>Car of the Year</strong></h4>
-    <div class="w3-row w3-large">
-      <div class="w3-col s6">
-        <p><i class="fa fa-fw fa-male"></i> Max people: 4</p>
-        <p><i class="fa fa-fw fa-bath"></i> Engine: twin-turbocharged 3.5-liter V-6; </p>
-        <p><i class="fa fa-fw fa-bed"></i> Price range: $90,100-$100,400</p>
-      </div>
-      
+  <div class="w3-container" id="selectedCarInfo">
+    <h4><strong>Car Information</strong></h4>
+    <p id="selectedMake">Selected Make: </p>
+    <p id="selectedModel">Selected Model: </p>
+    <p id="selectedYear">Selected Year: </p>
+    <p id="selectedMileage">Selected Mileage: </p>
+   
+    {% if prediction %}
+    <div class="prediction">
+      Your predicted price is: {{ prediction }}
     </div>
-    <hr>
+    {% endif %}
+    </div
+ 
+
+  
+ 
+      
     
-    <h4><strong>Description</strong></h4>
-    <div class="w3-row w3-large">
-      <div class="w3-col s6">
-        <p><i class="fa fa-fw fa-shower"></i> Estimated combined fuel economy range: 20-21 mpg</p>
-        <p><i class="fa fa-fw fa-wifi"></i> Base powertrain: 375-horsepower, twin-turbocharged 3.5-liter V-6; eight-speed automatic transmission; all-wheel drive</p>
-        
-      </div>
+    <hr>
+  
       
     </div>
     <hr>
@@ -151,6 +193,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: arial}
     
   <hr>
   
+
+
   <!-- Contact -->
   <div class="w3-container" id="contact">
     <h2>Contact</h2>
