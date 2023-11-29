@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Function to update the HTML content based on server response
 function updateCarInformation(response) {
   // Example: Update the HTML content with the received data
@@ -75,6 +76,8 @@ function saveFormData() {
 
 
 
+=======
+>>>>>>> 94756ceec0c83a20a594e1faa01579ff551ac9e6
 function captureSelectedMake() {
   // Get the selected make from the dropdown
   var dropdown = document.getElementById("makes");
@@ -141,6 +144,15 @@ function compileSecondValues(selectedMake) {
         console.log("Mileage: " + mileageValue);
         // You can perform further actions with the mileage value here
     });
+<<<<<<< HEAD
+=======
+
+  });
+  }
+// Rest of your code
+d3.json("api/cars").then((data) => {
+  console.log(data);
+>>>>>>> 94756ceec0c83a20a594e1faa01579ff551ac9e6
 
   });
   }
