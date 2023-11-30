@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Function to update the HTML content based on server response
 function updateCarInformation(response) {
   // Example: Update the HTML content with the received data
@@ -49,35 +48,11 @@ function saveFormData() {
   console.log("Selected Year:", selectedYear);
   console.log("Selected Mileage:", selectedMileage);
 
-  // Make an AJAX request to the server
-  $.ajax({
-    type: "POST",
-    url: "/model",  // Update the URL if needed
-    data: {
-        make: selectedMake,
-        model: selectedModel,
-        year: selectedYear,
-        mileage: selectedMileage
-    },
-    success: function (response) {
-        console.log(response);
-
-        // Check if the prediction is available in the response
-        if (response.prediction) {
-            // Update the HTML to display the prediction
-            $(".prediction").html("Your predicted price is: " + response.prediction);
-        }
-    },
-    error: function (error) {
-        console.error("Error:", error);
-    }
-});
+ 
 }
 
 
 
-=======
->>>>>>> 94756ceec0c83a20a594e1faa01579ff551ac9e6
 function captureSelectedMake() {
   // Get the selected make from the dropdown
   var dropdown = document.getElementById("makes");
@@ -144,15 +119,6 @@ function compileSecondValues(selectedMake) {
         console.log("Mileage: " + mileageValue);
         // You can perform further actions with the mileage value here
     });
-<<<<<<< HEAD
-=======
-
-  });
-  }
-// Rest of your code
-d3.json("api/cars").then((data) => {
-  console.log(data);
->>>>>>> 94756ceec0c83a20a594e1faa01579ff551ac9e6
 
   });
   }

@@ -7,6 +7,8 @@ import sqlite3
 import base64
 from io import BytesIO
 import pickle
+import sklearn as sk
+print(sk.__version__)
 
 # Create an SQLAlchemy engine and session
 engine = create_engine("sqlite:///data/DataBAse.db")
@@ -71,12 +73,14 @@ def prices():
 
 @app.route("/model", methods=["POST"])
 def model():
-    try:
+   # try:
         # Get the selected values from the AJAX request
         selected_make = request.form.get("make")
         selected_model = request.form.get("model")
-        selected_year = request.form.get("year")
-        selected_mileage = request.form.get("mileage")
+        selected_year = float(request.form.get("year"))
+        selected_mileage = float(request.form.get("mileage"))
+
+        print(request.form)
 
         # Perform any necessary processing with the selected values
         # For example, use them in your machine learning model or database queries
@@ -97,10 +101,10 @@ def model():
         # Return the prediction in the JSON response
         return jsonify({"status": "success", "message": "Data received successfully", "prediction": prediction})
 
-    except Exception as e:
-        # Print the exception to the console for debugging
-        print(f"An error occurred: {str(e)}")
-        return jsonify({"status": "error", "message": str(e)}), 500  # Return a 500 Internal Server Error status
+  #  except Exception as e:
+   #     # Print the exception to the console for debugging
+    #    print(f"An error occurred: {str(e)}")
+     #   return jsonify({"status": "error", "message": str(e)}), 500  # Return a 500 Internal Server Error status
     
 
 @app.route("/data")
